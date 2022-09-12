@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
@@ -23,12 +24,10 @@ public class Recursion {
 
     // 3. Подсчет элементов в списке через pop()
     public static int listCount(LinkedList L) {
-        try {
-            L.pop();
-        }
-        catch (NoSuchElementException E) {
+        if (L.size() == 0) {
             return 0;
         }
+        L.pop();
         return 1 + listCount(L);
     }
 
@@ -50,14 +49,12 @@ public class Recursion {
     public static void printEven(ArrayList<Integer> A) {
         ArrayList<Integer> Acopy = new ArrayList();
         Acopy.addAll(A);
-        try {
-            int x = Acopy.get(0);
-            if (x % 2 == 0) {
-                System.out.println(x);
-            }
-        }
-        catch (IndexOutOfBoundsException e) {
+        if (A.size() == 0) {
             return;
+        }
+        int x = Acopy.get(0);
+        if (x % 2 == 0) {
+            System.out.println(x);
         }
         Acopy.remove(0);
         printEven(Acopy);
@@ -67,15 +64,40 @@ public class Recursion {
     public static void printEvenIndexes(ArrayList A) {
         ArrayList Acopy = new ArrayList();
         Acopy.addAll(A);
-        try {
-            System.out.println(Acopy.get(0));
-            Acopy.remove(0);
-            Acopy.remove(0);
-        }
-        catch (IndexOutOfBoundsException e) {
+        int Asize = Acopy.size();
+        if (Asize == 0) {
             return;
         }
+        System.out.println(Acopy.get(0));
+        if (Acopy.size() < 2) {
+            return;
+        }
+        Acopy.remove(0);
+        Acopy.remove(0);
         printEvenIndexes(Acopy);
+    }
+
+    // 7. Нахождение второго максимального в списке
+    // Подразумевается, что рекурсивная функция вызывается только из основной,
+    // т.к. она меняет входящий список
+    public static int recursionSecondMax(ArrayList<Integer> A) {
+        int max = A.get(0);
+        if (A.size() == 1) {
+            return max;
+        }
+        if (max < A.get(1)) {
+            A.remove(0);
+        } else {
+            A.remove(1);
+        }
+        return recursionSecondMax(A);
+    }
+    public static int secondMax(ArrayList<Integer> A) {
+        ArrayList<Integer> Acopy = new ArrayList<>(A);
+        int firstMax = recursionSecondMax(Acopy); // находим первый максимальный
+        Acopy = new ArrayList<>(A);
+        Acopy.removeAll(Arrays.asList(firstMax)); // удаляем все первые максимальные
+        return recursionSecondMax(Acopy);
     }
 
 }

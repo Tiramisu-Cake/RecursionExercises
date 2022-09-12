@@ -46,58 +46,35 @@ public class Recursion {
     }
 
     // 5. Печать четных чисел из списка
-    public static void printEven(ArrayList<Integer> A) {
-        ArrayList<Integer> Acopy = new ArrayList();
-        Acopy.addAll(A);
-        if (A.size() == 0) {
+    public static void recursionPrintEven(int N, ArrayList<Integer> A) {
+        if (N == 0) {
             return;
         }
-        int x = Acopy.get(0);
+        int x = A.get(N - 1);
         if (x % 2 == 0) {
             System.out.println(x);
         }
-        Acopy.remove(0);
-        printEven(Acopy);
+        recursionPrintEven(N - 1,A);
+    }
+
+    public static void printEven(ArrayList<Integer> A) {
+        int Asize = A.size();
+        recursionPrintEven(Asize, A);
     }
 
     // 6. Печать элементов с четными индексами
+    public static void recursionPrintEvenIndexes(int N, ArrayList A) {
+        if (N == 0) {
+            return;
+        }
+        if (( A.size() - N) % 2 == 0) {
+            System.out.println(A.get(A.size() - N));
+        }
+        recursionPrintEvenIndexes(N-1,A);
+    }
     public static void printEvenIndexes(ArrayList A) {
-        ArrayList Acopy = new ArrayList();
-        Acopy.addAll(A);
-        int Asize = Acopy.size();
-        if (Asize == 0) {
-            return;
-        }
-        System.out.println(Acopy.get(0));
-        if (Acopy.size() < 2) {
-            return;
-        }
-        Acopy.remove(0);
-        Acopy.remove(0);
-        printEvenIndexes(Acopy);
-    }
-
-    // 7. Нахождение второго максимального в списке
-    // Подразумевается, что рекурсивная функция вызывается только из основной,
-    // т.к. она меняет входящий список
-    public static int recursionSecondMax(ArrayList<Integer> A) {
-        int max = A.get(0);
-        if (A.size() == 1) {
-            return max;
-        }
-        if (max < A.get(1)) {
-            A.remove(0);
-        } else {
-            A.remove(1);
-        }
-        return recursionSecondMax(A);
-    }
-    public static int secondMax(ArrayList<Integer> A) {
-        ArrayList<Integer> Acopy = new ArrayList<>(A);
-        int firstMax = recursionSecondMax(Acopy); // находим первый максимальный
-        Acopy = new ArrayList<>(A);
-        Acopy.removeAll(Arrays.asList(firstMax)); // удаляем все первые максимальные
-        return recursionSecondMax(Acopy);
+        int Asize = A.size();
+        recursionPrintEvenIndexes(Asize,A);
     }
 
 }

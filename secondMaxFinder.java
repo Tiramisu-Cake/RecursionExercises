@@ -27,8 +27,6 @@ public class secondMaxFinder {
     }
 
     public static int secondMax(ArrayList<Integer> A) {
-        ArrayList<Integer> Acopy = new ArrayList<>(A);
-
         //начальные значение для рекурсии
         int firstMax = A.get(0);
         int secondMax = A.get(1);
@@ -40,6 +38,6 @@ public class secondMaxFinder {
         }
 
         int Asize = A.size();
-        return recursionSecondMax(firstMax, secondMax, Asize, Acopy);
+        return recursionSecondMax(firstMax, secondMax, Asize, A);
     }
 }

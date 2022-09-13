@@ -1,9 +1,7 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
+import java.io.File;
+import java.util.*;
 
 public class Recursion {
     // 1. Возведение в степень
@@ -75,6 +73,20 @@ public class Recursion {
     public static void printEvenIndexes(ArrayList A) {
         int Asize = A.size();
         recursionPrintEvenIndexes(Asize,A);
+    }
+
+    // 7. см. файл secondMaxFinder.java
+
+    // 8. Печать всех файлов в заданном каталоге и его подкаталогах произвольной вложенности
+    public static void allFiles(String path) {
+        File dir = new File(path);
+        List<File> files = Arrays.asList(dir.listFiles());
+        for(File file : files) {
+            System.out.println(file);
+            if (file.isDirectory()) {
+                allFiles(file.getPath());
+            }
+        }
     }
 
 }

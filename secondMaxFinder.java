@@ -10,7 +10,7 @@ public class secondMaxFinder {
             return secondMax;
         }
 
-        int currentElement = A.get(A.size() - N + 2);
+        int currentElement = A.get(N-1);
 
         // если текущий элемент между первым и вторым максимальными
         if (secondMax < currentElement && currentElement < firstMax) {

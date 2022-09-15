@@ -13,12 +13,12 @@ public class secondMaxFinder {
         int currentElement = A.get(N-1);
 
         // если текущий элемент между первым и вторым максимальными
-        if (secondMax < currentElement && currentElement < firstMax) {
+        if (secondMax <= currentElement && currentElement <= firstMax) {
             secondMax = currentElement;
         }
 
         // если текущий элемент максимальный
-        if (firstMax < currentElement) {
+        if (firstMax <= currentElement) {
             secondMax = firstMax;
             firstMax = currentElement;
         }
@@ -31,7 +31,7 @@ public class secondMaxFinder {
         int firstMax = A.get(0);
         int secondMax = A.get(1);
 
-        if (firstMax < secondMax) {
+        if (firstMax <= secondMax) {
             int x = secondMax;
             secondMax = firstMax;
             firstMax = x;
